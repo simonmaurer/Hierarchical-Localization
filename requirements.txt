@@ -8,3 +8,5 @@ plotly
 scipy
 h5py
 pycolmap>=0.1.0
+tensorflow>=2.5.3
+larq-compute-engine>=0.6.2
