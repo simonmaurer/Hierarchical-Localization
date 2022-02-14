@@ -8,5 +8,6 @@ plotly
 scipy
 h5py
 pycolmap>=0.1.0
-tensorflow>=2.5.3
+tensorflow-macos~=2.5.0 ; platform_system == "Darwin" and platform_machine == "arm64"
+tensorflow~=2.5.3 ; platform_system != "Darwin" and platform_machine != "arm64"
 larq-compute-engine>=0.6.2
