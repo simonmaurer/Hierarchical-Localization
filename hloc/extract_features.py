@@ -65,6 +65,17 @@ confs = {
             'resize_max': 1600,
         },
     },
+    'kp2d': {
+        'output': 'feats-r2d2-n4800-r640',
+        'model': {
+            'name': 'kp2d',
+            'max_keypoints': 4800,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 640,
+        },
+    },
     'r2d2': {
         'output': 'feats-r2d2-n5000-r1024',
         'model': {
