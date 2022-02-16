@@ -66,9 +66,20 @@ confs = {
         },
     },
     'kp2d': {
-        'output': 'feats-r2d2-n4800-r640',
+        'output': 'feats-kp2d-n4800-r640',
         'model': {
             'name': 'kp2d',
+            'max_keypoints': 4800,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 640,
+        },
+    },
+    'muri': {
+        'output': 'feats-muri-n4800-r640',
+        'model': {
+            'name': 'muri',
             'max_keypoints': 4800,
         },
         'preprocessing': {
