@@ -61,4 +61,6 @@ class SuperPoint(BaseModel):
         self.net = superpoint.SuperPoint(conf)
 
     def _forward(self, data):
+        img = data['image']
+        print(img.shape)
         return self.net(data)
