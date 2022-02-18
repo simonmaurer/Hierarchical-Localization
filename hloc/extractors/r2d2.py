@@ -35,6 +35,7 @@ class R2D2(BaseModel):
 
     def _forward(self, data):
         img = data['image']
+        print(img.shape)
         img = self.norm_rgb(img)
 
         xys, desc, scores = extract_multiscale(
@@ -49,7 +50,10 @@ class R2D2(BaseModel):
         xy = xys[idxs, :2]
         desc = desc[idxs].t()
         scores = scores[idxs]
-
+        
+        print("Positions shape:", xy.shape)
+        print("Descriptors shape:", desc.shape)
+        print("Scores shape": scores.shape)
         pred = {'keypoints': xy[None],
                 'descriptors': desc[None],
                 'scores': scores[None]}
