@@ -10,6 +10,7 @@ from tqdm import tqdm
 import pprint
 import collections.abc as collections
 import PIL.Image
+from torchvision.transforms.functional import center_crop
 
 from . import extractors, logger
 from .utils.base_model import dynamic_load
@@ -206,6 +207,12 @@ class ImageDataset(torch.utils.data.Dataset):
             size_new = tuple(int(round(x*scale)) for x in size)
             image = resize_image(image, size_new, self.conf.interpolation)
 
+            if self.conf.center_crop:
+                image = torch.from_numpy(image)
+                size_new = tuple(x-np.mod(x, self.conf.cell_size)) for x in size_new)
+                image = center_crop(image, size_new)
+                image = image.numpy()
+                
         if self.conf.grayscale:
             image = image[None]
         else:
