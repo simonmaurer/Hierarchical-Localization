@@ -22,7 +22,7 @@ class KP2D(BaseModel):
     required_inputs = ['image']
 
     def _init(self, conf):
-        model_path = muri_path / "models" / conf['model_name']
+        model_path = muri_path / "experiments" / conf['model_name']
         self.detector = MURIDetector(str(model_path.absolute()), input_shape=(240,320,3), keep_topk_or_threshold=conf['keep_topk_or_threshold'])
         #tflite_path = ""
         #lce_model = None
