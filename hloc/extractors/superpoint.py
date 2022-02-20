@@ -63,10 +63,11 @@ class SuperPoint(BaseModel):
     def _forward(self, data):
         img = data['image']
         print(img.shape)
+        data = self.net(data)
         scores = data['scores']
         positions = data['keypoints']
         descriptors = data['descriptors']
         print("Positions shape: ", positions.shape)
         print("Descriptors shape: ", descriptors.shape)
         print("Scores shape: ", scores.shape)
-        return self.net(data)
+        return data
