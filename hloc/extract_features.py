@@ -67,10 +67,10 @@ confs = {
         },
     },
     'kp2d': {
-        'output': 'feats-kp2d-n4800-r640',
+        'output': 'feats-kp2d-t0.7-r640',
         'model': {
             'name': 'kp2d',
-            'max_keypoints': 4800,
+            'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
@@ -78,10 +78,10 @@ confs = {
         },
     },
     'muri': {
-        'output': 'feats-muri-n4800-r640',
+        'output': 'feats-muri-t0.7-r640',
         'model': {
             'name': 'muri',
-            'max_keypoints': 4800,
+            'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
