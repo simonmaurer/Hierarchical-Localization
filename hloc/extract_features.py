@@ -209,7 +209,7 @@ class ImageDataset(torch.utils.data.Dataset):
 
             if self.conf.center_crop:
                 image = torch.from_numpy(image)
-                size_new = tuple(x-np.mod(x, self.conf.cell_size)) for x in size_new)
+                size_new = tuple(x-np.mod(x, self.conf.cell_size) for x in size_new)
                 image = center_crop(image, size_new)
                 image = image.numpy()
                 
