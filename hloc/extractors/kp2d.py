@@ -12,7 +12,7 @@ sys.path.append(str(muri_path))
 from muri.detector import MURIDetector
 
 
-class MURI(BaseModel):
+class KP2D(BaseModel):
     default_conf = {
         'model_name': 'kp2d',
         'keep_topk_or_threshold': 0.7,
