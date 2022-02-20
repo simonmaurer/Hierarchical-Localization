@@ -75,6 +75,8 @@ confs = {
         'preprocessing': {
             'grayscale': False,
             'resize_max': 640,
+            'center_crop': True,
+            'cell_size': 8,
         },
     },
     'muri': {
@@ -86,6 +88,8 @@ confs = {
         'preprocessing': {
             'grayscale': False,
             'resize_max': 640,
+            'center_crop': True,
+            'cell_size': 8,
         },
     },
     'r2d2': {
