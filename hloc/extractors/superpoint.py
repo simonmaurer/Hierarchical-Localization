@@ -67,7 +67,9 @@ class SuperPoint(BaseModel):
         scores = data['scores']
         positions = data['keypoints']
         descriptors = data['descriptors']
-        print("Positions shape: ", positions.shape)
-        print("Descriptors shape: ", descriptors.shape)
-        print("Scores shape: ", scores.shape)
+        print("Positions shape: ", positions)
+        print("Positions len: ", len(positions))
+        print("Position item: ", positions[0])
+        #print("Descriptors shape: ", descriptors.shape)
+        #print("Scores shape: ", scores.shape)
         return data
