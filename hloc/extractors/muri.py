@@ -49,7 +49,7 @@ class MURI(BaseModel):
         #keypoints = keypoints.reshape((keypoints.shape[0]*keypoints.shape[1], keypoints.shape[2]))
         #scores = scores.reshape((scores.shape[0]*scores.shape[1], ))
         
-        scores, keypoints, descriptors = self.net.detectAndCompute(img)
+        scores, keypoints, descriptors = self.detector.detectAndCompute(img)
 
         scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
