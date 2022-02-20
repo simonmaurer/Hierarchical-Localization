@@ -37,7 +37,7 @@ class MURI(BaseModel):
     
     def _forward(self, data):
         img = data['image']
-        img = tf.constant(img.numpy())
+        img = tf.convert_to_tensor(img.numpy())
         img = tf.transpose(img, (0,2,3,1))
         img = self._normalize(img)
         
@@ -51,9 +51,9 @@ class MURI(BaseModel):
         
         scores, keypoints, descriptors = self.net.detectAndCompute(img)
 
-        scores = torch.FloatTensor(scores)
-        keypoints = torch.FloatTensor(keypoints)
-        descriptors = torch.FloatTensor(descriptors).t()
+        scores = torch.from_numpy(scores)
+        keypoints = torch.from_numpy(keypoints)
+        descriptors = torch.from_numpy(descriptors).t()
 
         pred = {'keypoints': keypoints[None],
                 'descriptors': descriptors[None],
