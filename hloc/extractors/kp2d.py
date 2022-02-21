@@ -7,7 +7,7 @@ import tensorflow as tf
 import torch
 import larq_compute_engine as lce
 
-muri_path = Path(__file__).parent / "../../third_party/muri"
+muri_path = Path(__file__).parent / "../../third_party/mnet"
 sys.path.append(str(muri_path))
 from muri.detector import MURIDetector
 
