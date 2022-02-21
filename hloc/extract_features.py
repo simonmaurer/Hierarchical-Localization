@@ -212,6 +212,7 @@ class ImageDataset(torch.utils.data.Dataset):
             size_new = tuple(x-np.mod(x, 8) for x in size_new)
             print("Size new: ",size_new)
             image = center_crop(image, size_new)
+            print("Image dtype: ",image.dtype)
             image = image.numpy()
             print("Image shape after crop: ",image.shape)
                 
