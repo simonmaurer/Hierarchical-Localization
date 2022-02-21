@@ -67,14 +67,14 @@ confs = {
         },
     },
     'kp2d': {
-        'output': 'feats-kp2d-t0.7-r320',
+        'output': 'feats-kp2d-t0.7-r640',
         'model': {
             'name': 'kp2d',
             'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
-            'resize_max': 320,
+            'resize_max': 640,
             'resize_force': True,
         },
     },
