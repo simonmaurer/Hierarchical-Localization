@@ -40,6 +40,7 @@ class KP2D(BaseModel):
         img = tf.convert_to_tensor(img.numpy())
         img = tf.transpose(img, (0,2,3,1))
         img = self._normalize(img)
+        print("Img shape: ", img.shape)
         
         #descriptors, keypoints, scores = self.net.predict(img)
         #descriptors = descriptors.squeeze()
@@ -50,12 +51,12 @@ class KP2D(BaseModel):
         #scores = scores.reshape((scores.shape[0]*scores.shape[1], ))
         
         scores, keypoints, descriptors = self.detector.detectAndCompute(img)
+        print("Type descriptors: ", type(descriptors))
+        print(descriptors.shape)
 
         scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
         descriptors = torch.from_numpy(descriptors)
-        print(type(descriptors))
-        print(descriptors.shape)
         descriptors = descriptors.t()
 
         pred = {'keypoints': keypoints[None],
