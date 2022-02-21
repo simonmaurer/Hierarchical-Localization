@@ -80,8 +80,21 @@ confs = {
     'muri': {
         'output': 'feats-muri-t0.7-r640',
         'model': {
-            'name': 'muri',
-            'keep_topk_or_threshold': 0.7,
+            'name': 'Int8InitBinSkipRIPSSeqEInt8DInt8KPFinalNoSkipDKeypointNet_d256_intpl2_lr_m0.2_bs8_hard_swish_qmax1',
+            'keep_topk_or_threshold': None,
+            'binary': False
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 640,
+        },
+    },
+    'muri_binary': {
+        'output': 'feats-murib-t0.7-r640',
+        'model': {
+            'name': 'KeypointNetBinaryLML_d256_intp_lr_m12_bs8_bsigmoid_k64_a0.05',
+            'keep_topk_or_threshold': None,
+            'binary': True
         },
         'preprocessing': {
             'grayscale': False,
