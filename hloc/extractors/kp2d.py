@@ -18,12 +18,13 @@ class KP2D(BaseModel):
         'keep_topk_or_threshold': 0.7,
         'min_size': 320,
         'max_size': 1024,
+        'gpu': False,
     }
     required_inputs = ['image']
 
     def _init(self, conf):
         model_path = muri_path / "experiments" / conf['model_name']
-        self.detector = MURIDetector(str(model_path.absolute()), input_shape=(240,320,3), keep_topk_or_threshold=conf['keep_topk_or_threshold'])
+        self.detector = MURIDetector(str(model_path.absolute()), input_shape=(240,320,3), keep_topk_or_threshold=conf['keep_topk_or_threshold'], gpu=conf['gpu'])
         #tflite_path = ""
         #lce_model = None
         #with open(tflite_path, 'rb') as file:
@@ -37,7 +38,6 @@ class KP2D(BaseModel):
     
     def _forward(self, data):
         img = data['image']
-        img = img.cpu()
         img = tf.convert_to_tensor(img.numpy())
         img = tf.transpose(img, (0,2,3,1))
         img = self._normalize(img)
