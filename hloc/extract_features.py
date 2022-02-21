@@ -93,7 +93,7 @@ confs = {
     'muri_binary': {
         'output': 'feats-murib-t0.7-r640',
         'model': {
-            'name': 'muri_binary'
+            'name': 'muri_binary',
             'model_name': 'KeypointNetBinaryLML_d256_intp_lr_m12_bs8_bsigmoid_k64_a0.05',
             'keep_topk_or_threshold': None,
             'binary': True
