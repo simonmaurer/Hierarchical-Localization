@@ -66,6 +66,19 @@ confs = {
             'resize_max': 1600,
         },
     },
+    'superpoint-640': {
+        'output': 'feats-superpoint-n4096-rmax640',
+        'model': {
+            'name': 'superpoint',
+            'nms_radius': 3,
+            'max_keypoints': 4096,
+        },
+        'preprocessing': {
+            'grayscale': True,
+            'resize_max': 640,
+            'resize_force': True,
+        },
+    },
     'kp2d': {
         'output': 'feats-kp2d-t0.7-r640',
         'model': {
@@ -78,11 +91,25 @@ confs = {
             'resize_force': True,
         },
     },
+    'kp2d-640': {
+        'output': 'feats-kp2d-n4000-r640',
+        'model': {
+            'name': 'kp2d',
+            'keep_topk_or_threshold': 4000,
+            'gpu': False,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 640,
+            'resize_force': True,
+        },
+    },
     'muri': {
         'output': 'feats-muri-t0.7-r640',
         'model': {
             'name': 'muri',
             'keep_topk_or_threshold': 0.7,
+            'gpu': False,
         },
         'preprocessing': {
             'grayscale': False,
@@ -95,6 +122,7 @@ confs = {
         'model': {
             'name': 'muri_binary',
             'keep_topk_or_threshold': 0.7,
+            'gpu': False,
         },
         'preprocessing': {
             'grayscale': False,
