@@ -206,12 +206,14 @@ class ImageDataset(torch.utils.data.Dataset):
             scale = self.conf.resize_max / max(size)
             size_new = tuple(int(round(x*scale)) for x in size)
             image = resize_image(image, size_new, self.conf.interpolation)
-
+            print("Image shape before crop: ",image.shape)
             #if self.conf.center_crop:
             image = torch.from_numpy(image)
             size_new = tuple(x-np.mod(x, 8) for x in size_new)
+            print("Size new: ",size_new)
             image = center_crop(image, size_new)
             image = image.numpy()
+            print("Image shape after crop: ",image.shape)
                 
         if self.conf.grayscale:
             image = image[None]
