@@ -75,6 +75,7 @@ confs = {
         'preprocessing': {
             'grayscale': False,
             'resize_max': 320,
+            'resize_force': True,
         },
     },
     'muri': {
@@ -86,6 +87,7 @@ confs = {
         'preprocessing': {
             'grayscale': False,
             'resize_max': 640,
+            'resize_force': True,
         },
     },
     'muri_binary': {
@@ -97,6 +99,7 @@ confs = {
         'preprocessing': {
             'grayscale': False,
             'resize_max': 640,
+            'resize_force': True,
         },
     },
     'r2d2': {
@@ -224,15 +227,14 @@ class ImageDataset(torch.utils.data.Dataset):
             image = image.transpose((2, 0, 1))  # HxWxC to CxHxW
         image = image / 255.
         
-        #print("Image shape before crop: ",image.shape)
-        #if self.conf.center_crop:
-        image = torch.from_numpy(image)
-        size_new = tuple(x-np.mod(x, 8) for x in size_new)
-        #print("Size new: ",size_new)
-        image = center_crop(image, size_new)
-        #print("Image dtype: ",image.dtype)
-        image = image.numpy()
-        #print("Image shape after crop: ",image.shape)
+        if self.conf.resize_max and (self.conf.resize_force
+                                     or max(size) > self.conf.resize_max):
+            scale = self.conf.resize_max / max(size)
+            size_new = tuple(int(round(x*scale)) for x in size)
+            image = torch.from_numpy(image)
+            size_new = tuple(x-np.mod(x, 8) for x in size_new)
+            image = center_crop(image, size_new)
+            image = image.numpy()
 
         data = {
             'name': name,
