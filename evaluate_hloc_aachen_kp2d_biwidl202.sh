@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH  --output=/scratch-second/simomaur/log/hloc/aachen/%j.out
-#SBATCH  --constraint='titan_x|titan_xp|geforce_rtx_2080_ti'
+#SBATCH  --output=/scratch_net/biwidl202/simomaur/log/hloc/aachen/%j.out
+#SBATCH  --gres=gpu:1
 #SBATCH  --mem=40G
 #SBATCH  --cpus-per-task=4
 
