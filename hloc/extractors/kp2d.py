@@ -18,6 +18,7 @@ class KP2D(BaseModel):
         'keep_topk_or_threshold': 0.7,
         'min_size': 320,
         'max_size': 1024,
+        'binary': False,
     }
     required_inputs = ['image']
 
