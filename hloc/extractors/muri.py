@@ -53,8 +53,7 @@ class MURI(BaseModel):
 
         scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
-        descriptors = torch.from_numpy(descriptors)
-        descriptors = descriptors.t()
+        descriptors = torch.from_numpy(descriptors).t()
 
         pred = {'keypoints': keypoints[None],
                 'descriptors': descriptors[None],
