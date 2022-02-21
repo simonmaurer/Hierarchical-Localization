@@ -67,14 +67,14 @@ confs = {
         },
     },
     'kp2d': {
-        'output': 'feats-kp2d-t0.7-r640',
+        'output': 'feats-kp2d-t0.7-r320',
         'model': {
             'name': 'kp2d',
             'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
-            'resize_max': 640,
+            'resize_max': 320,
         },
     },
     'muri': {
@@ -82,7 +82,6 @@ confs = {
         'model': {
             'name': 'muri',
             'keep_topk_or_threshold': None,
-            'binary': False
         },
         'preprocessing': {
             'grayscale': False,
@@ -94,7 +93,6 @@ confs = {
         'model': {
             'name': 'muri_binary',
             'keep_topk_or_threshold': None,
-            'binary': True
         },
         'preprocessing': {
             'grayscale': False,
