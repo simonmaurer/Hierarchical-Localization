@@ -82,7 +82,7 @@ confs = {
         'output': 'feats-muri-t0.7-r640',
         'model': {
             'name': 'muri',
-            'keep_topk_or_threshold': None,
+            'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
@@ -94,7 +94,7 @@ confs = {
         'output': 'feats-murib-t0.7-r640',
         'model': {
             'name': 'muri_binary',
-            'keep_topk_or_threshold': None,
+            'keep_topk_or_threshold': 0.7,
         },
         'preprocessing': {
             'grayscale': False,
