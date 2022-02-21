@@ -37,6 +37,7 @@ class KP2D(BaseModel):
     
     def _forward(self, data):
         img = data['image']
+        img = img.cpu()
         img = tf.convert_to_tensor(img.numpy())
         img = tf.transpose(img, (0,2,3,1))
         img = self._normalize(img)
