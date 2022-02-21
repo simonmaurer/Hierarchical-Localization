@@ -54,6 +54,8 @@ class KP2D(BaseModel):
         scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
         descriptors = torch.from_numpy(descriptors)
+        print(type(descriptors))
+        print(descriptors.shape)
         descriptors = descriptors.t()
 
         pred = {'keypoints': keypoints[None],
