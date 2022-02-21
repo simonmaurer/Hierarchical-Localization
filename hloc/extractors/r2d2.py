@@ -51,9 +51,6 @@ class R2D2(BaseModel):
         desc = desc[idxs].t()
         scores = scores[idxs]
         
-        print("Positions shape: ", xy.shape)
-        print("Descriptors shape: ", desc.shape)
-        print("Scores shape: ", scores.shape)
         pred = {'keypoints': xy[None],
                 'descriptors': desc[None],
                 'scores': scores[None]}
