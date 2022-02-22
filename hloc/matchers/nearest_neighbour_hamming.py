@@ -12,8 +12,9 @@ def find_nn(dist, ratio_thresh, distance_thresh):
     if distance_thresh:
         mask = mask & (dist_nn[..., 0] <= distance_thresh)
     matches = torch.where(mask, ind_nn[..., 0], ind_nn.new_tensor(-1))
-    scores = torch.where(mask, (dist_nn[..., 0]+1)/2, dist_nn.new_tensor(0))
-    return matches, scores
+    #scores = torch.where(mask, (dist_nn[..., 0]+1)/2, dist_nn.new_tensor(0))
+    #return matches, scores
+    return matches
 
 
 def mutual_check(m0, m1):
@@ -48,15 +49,11 @@ class NearestNeighborHamming(BaseModel):
         if data['descriptors0'].size(-1) == 1 or data['descriptors1'].size(-1) == 1:
             ratio_threshold = None
         d0, d1 = data['descriptors0'], data['descriptors1']
-        dist = torch.einsum('bdn,bmd->bnm', 1-d0, torch.einsum('bij->bji', d1)) + torch.einsum('bdn,bmd->bnm', d0, torch.einsum('bij->bji',1-d1))
-        matches0, scores0 = find_nn(
-            dist, ratio_threshold, self.conf['distance_threshold'])
+        dist = torch.einsum('bdn,bmd->bnm', 1-d0, torch.einsum('bij->bji', d1)) + torch.einsum('bdn,bmd->bnm', d0, torch.einsum('bij->bji', 1-d1))
+        matches0 = find_nn(dist, ratio_threshold, self.conf['distance_threshold'])
         if self.conf['do_mutual_check']:
-            matches1, scores1 = find_nn(
-                dist.transpose(1, 2), ratio_threshold,
-                self.conf['distance_threshold'])
+            matches1 = find_nn(dist.transpose(1, 2), ratio_threshold, self.conf['distance_threshold'])
             matches0 = mutual_check(matches0, matches1)
         return {
             'matches0': matches0,
-            'matching_scores0': scores0,
         }
