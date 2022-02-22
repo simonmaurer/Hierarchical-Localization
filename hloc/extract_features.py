@@ -66,12 +66,25 @@ confs = {
             'resize_max': 1600,
         },
     },
-    'superpoint-640': {
-        'output': 'feats-superpoint-n4096-rmax640',
+    'superpoint': {
+        'output': 'feats-superpoint-n4096-r1024',
         'model': {
             'name': 'superpoint',
             'nms_radius': 3,
             'max_keypoints': 4096,
+        },
+        'preprocessing': {
+            'grayscale': True,
+            'resize_max': 1024,
+            'resize_force': True,
+        },
+    },
+    'superpoint_640': {
+        'output': 'feats-superpoint-n4096-rmax640',
+        'model': {
+            'name': 'superpoint',
+            'nms_radius': 3,
+            'max_keypoints': 1600,
         },
         'preprocessing': {
             'grayscale': True,
@@ -80,22 +93,22 @@ confs = {
         },
     },
     'kp2d': {
-        'output': 'feats-kp2d-t0.7-r640',
-        'model': {
-            'name': 'kp2d',
-            'keep_topk_or_threshold': 0.7,
-        },
-        'preprocessing': {
-            'grayscale': False,
-            'resize_max': 640,
-            'resize_force': True,
-        },
-    },
-    'kp2d-640': {
-        'output': 'feats-kp2d-n4000-r640',
+        'output': 'feats-kp2d-n4000-r1024',
         'model': {
             'name': 'kp2d',
             'keep_topk_or_threshold': 4000,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1024,
+            'resize_force': True,
+        },
+    },
+    'kp2d_640': {
+        'output': 'feats-kp2d-n4000-r640',
+        'model': {
+            'name': 'kp2d',
+            'keep_topk_or_threshold': 1600,
             'gpu': False,
         },
         'preprocessing': {
@@ -105,10 +118,23 @@ confs = {
         },
     },
     'muri': {
-        'output': 'feats-muri-t0.7-r640',
+        'output': 'feats-muri-n4000-r1024',
         'model': {
             'name': 'muri',
-            'keep_topk_or_threshold': 0.7,
+            'keep_topk_or_threshold': 4000,
+            'gpu': False,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1024,
+            'resize_force': True,
+        },
+    },
+    'muri_640': {
+        'output': 'feats-muri-n1600-r640',
+        'model': {
+            'name': 'muri',
+            'keep_topk_or_threshold': 1600,
             'gpu': False,
         },
         'preprocessing': {
@@ -118,10 +144,23 @@ confs = {
         },
     },
     'muri_binary': {
-        'output': 'feats-murib-t0.7-r640',
+        'output': 'feats-murib-n4000-r1024',
         'model': {
             'name': 'muri_binary',
-            'keep_topk_or_threshold': 0.7,
+            'keep_topk_or_threshold': 4000,
+            'gpu': False,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1024,
+            'resize_force': True,
+        },
+    },
+    'muri_binary_640': {
+        'output': 'feats-murib-n1600-r640',
+        'model': {
+            'name': 'muri_binary',
+            'keep_topk_or_threshold': 1600,
             'gpu': False,
         },
         'preprocessing': {
