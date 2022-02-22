@@ -44,12 +44,22 @@ class NearestNeighborHamming(BaseModel):
         ratio_threshold = self.conf['ratio_threshold']
         if data['descriptors0'].size(-1) == 1 or data['descriptors1'].size(-1) == 1:
             ratio_threshold = None
+            
         d0, d1 = data['descriptors0'], data['descriptors1']
+        if d0.dtype == torch.uint8:
+            device = d0.device
+            d0 = torch.from_numpy(np.unpackbits(d0.numpy(), axis=1).astype(np.float32)).to(device)
+        if d1.dtype == torch.uint8:
+            device = d1.device
+            d1 = torch.from_numpy(np.unpackbits(d1.numpy(), axis=1).astype(np.float32)).to(device)
+            
         dist = torch.einsum('bdn,bmd->bnm', 1-d0, torch.einsum('bij->bji', d1)) + torch.einsum('bdn,bmd->bnm', d0, torch.einsum('bij->bji', 1-d1))
         matches0 = find_nn(dist, ratio_threshold, self.conf['distance_threshold'])
+        
         if self.conf['do_mutual_check']:
             matches1 = find_nn(dist.transpose(1, 2), ratio_threshold, self.conf['distance_threshold'])
             matches0 = mutual_check(matches0, matches1)
+            
         return {
             'matches0': matches0,
         }
