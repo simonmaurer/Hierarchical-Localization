@@ -27,7 +27,7 @@ def main():
     #reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
     #results = outputs / 'Aachen_hloc_superpoint+superglue_netvlad20.txt'  # the result file
     reference_sfm = outputs / 'sfm_superpoint+NN-dist0.7'  # the SfM model we will build
-    results = outputs / 'Aachen_hloc_superpoint+NN-dist0.7_netvlad30.txt'  # the result file
+    results = outputs / 'Aachen_hloc_superpoint+NN-dist0.7c_netvlad30.txt'  # the result file
 
     # list the standard configurations available
     print(f'Configs for feature extractors:\n{pformat(extract_features.confs)}')
@@ -55,7 +55,7 @@ def main():
     loc_matches = match_features.main(matcher_conf, loc_pairs, feature_conf['output'], outputs)
     
     #localize_sfm.main(reconstruction, dataset / 'queries/*_time_queries_with_intrinsics.txt', loc_pairs, features, loc_matches, results, covisibility_clustering=True)  # not required with SuperPoint+SuperGlue
-    localize_sfm.main(reconstruction, dataset / 'queries/*_time_queries_with_intrinsics.txt', loc_pairs, features, loc_matches, results, covisibility_clustering=True)  # not required with SuperPoint+SuperGlue
+    localize_sfm.main(reconstruction, dataset / 'queries/*_time_queries_with_intrinsics.txt', loc_pairs, features, loc_matches, results, covisibility_clustering=False)  # not required with SuperPoint+SuperGlue
     
     
 if __name__ == "__main__":
