@@ -7,7 +7,7 @@ import numpy as np
 
 class BRISK(BaseModel):
     default_conf = {
-        'model_name': 'orb',
+        'model_name': 'brisk',
         'detection_threshold': None,
         'min_size': 320,
         'max_size': 1024,
@@ -30,7 +30,6 @@ class BRISK(BaseModel):
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
 
-        #scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
         if not self.conf['desc_uint8']:
             descriptors = np.unpackbits(descriptors, -1)
