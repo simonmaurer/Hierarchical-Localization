@@ -58,6 +58,22 @@ confs = {
             'name': 'nearest_neighbor',
             'do_mutual_check': True,
         },
+    },
+    'NNH-distance': {
+        'output': 'matches-NNH-mutual-dist12.0',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'distance_threshold': 12.0,
+        },
+    },
+    'NNH-ratio': {
+        'output': 'matches-NNH-mutual-ratio.7',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.7,
+        },
     }
 }
 
