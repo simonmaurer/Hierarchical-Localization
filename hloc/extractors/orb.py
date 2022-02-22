@@ -30,7 +30,6 @@ class ORB(BaseModel):
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
 
-        #scores = torch.from_numpy(scores)
         keypoints = torch.from_numpy(keypoints)
         if not self.conf['desc_uint8']:
             descriptors = np.unpackbits(descriptors, -1)
