@@ -26,8 +26,8 @@ def main():
     loc_pairs = outputs / 'pairs-query-netvlad30.txt'  # top 20 retrieved by NetVLAD
     #reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
     #results = outputs / 'Aachen_hloc_superpoint+superglue_netvlad20.txt'  # the result file
-    reference_sfm = outputs / 'sfm_kp2d+NN-dist0.7'  # the SfM model we will build
-    results = outputs / 'Aachen_hloc_kp2d+NN-dist0.7_netvlad30.txt'  # the result file
+    reference_sfm = outputs / 'sfm_superpoint+NN-dist0.7'  # the SfM model we will build
+    results = outputs / 'Aachen_hloc_superpoint+NN-dist0.7_netvlad30.txt'  # the result file
 
     # list the standard configurations available
     print(f'Configs for feature extractors:\n{pformat(extract_features.confs)}')
@@ -36,7 +36,7 @@ def main():
     retrieval_conf = extract_features.confs['netvlad']
     #feature_conf = extract_features.confs['superpoint_aachen']
     #matcher_conf = match_features.confs['superglue']
-    feature_conf = extract_features.confs['kp2d']
+    feature_conf = extract_features.confs['superpoint']
     matcher_conf = match_features.confs['NN-superpoint']
     
     features = extract_features.main(feature_conf, images, outputs)
