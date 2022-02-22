@@ -5,15 +5,12 @@ from ..utils.base_model import BaseModel
 
 def find_nn(dist, ratio_thresh, distance_thresh):
     dist_nn, ind_nn = dist.topk(2 if ratio_thresh else 1, dim=-1, largest=False)
-    #dist_nn = sim_nn
     mask = torch.ones(ind_nn.shape[:-1], dtype=torch.bool, device=dist.device)
     if ratio_thresh:
         mask = mask & (dist_nn[..., 0] <= (ratio_thresh)*dist_nn[..., 1])
     if distance_thresh:
         mask = mask & (dist_nn[..., 0] <= distance_thresh)
     matches = torch.where(mask, ind_nn[..., 0], ind_nn.new_tensor(-1))
-    #scores = torch.where(mask, (dist_nn[..., 0]+1)/2, dist_nn.new_tensor(0))
-    #return matches, scores
     return matches
 
 
@@ -43,7 +40,6 @@ class NearestNeighborHamming(BaseModel):
                 device=data['descriptors0'].device)
             return {
                 'matches0': matches0,
-                'matching_scores0': torch.zeros_like(matches0)
             }
         ratio_threshold = self.conf['ratio_threshold']
         if data['descriptors0'].size(-1) == 1 or data['descriptors1'].size(-1) == 1:
