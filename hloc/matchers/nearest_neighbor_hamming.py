@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 from ..utils.base_model import BaseModel
 
