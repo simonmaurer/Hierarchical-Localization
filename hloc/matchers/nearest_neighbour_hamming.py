@@ -3,16 +3,16 @@ import torch
 from ..utils.base_model import BaseModel
 
 
-def find_nn(sim, ratio_thresh, distance_thresh):
-    sim_nn, ind_nn = sim.topk(2 if ratio_thresh else 1, dim=-1, largest=True)
-    dist_nn = sim_nn
-    mask = torch.ones(ind_nn.shape[:-1], dtype=torch.bool, device=sim.device)
+def find_nn(dist, ratio_thresh, distance_thresh):
+    dist_nn, ind_nn = dist.topk(2 if ratio_thresh else 1, dim=-1, largest=False)
+    #dist_nn = sim_nn
+    mask = torch.ones(ind_nn.shape[:-1], dtype=torch.bool, device=dist.device)
     if ratio_thresh:
         mask = mask & (dist_nn[..., 0] <= (ratio_thresh)*dist_nn[..., 1])
     if distance_thresh:
         mask = mask & (dist_nn[..., 0] <= distance_thresh)
     matches = torch.where(mask, ind_nn[..., 0], ind_nn.new_tensor(-1))
-    scores = torch.where(mask, (sim_nn[..., 0]+1)/2, sim_nn.new_tensor(0))
+    scores = torch.where(mask, (dist_nn[..., 0]+1)/2, dist_nn.new_tensor(0))
     return matches, scores
 
 
@@ -48,12 +48,12 @@ class NearestNeighborHamming(BaseModel):
         if data['descriptors0'].size(-1) == 1 or data['descriptors1'].size(-1) == 1:
             ratio_threshold = None
         d0, d1 = data['descriptors0'], data['descriptors1']
-        sim = torch.einsum('bdn,bmd->bnm', 1-d0, torch.einsum('bij->bji', d1)) + torch.einsum('bdn,bmd->bnm', d0, torch.einsum('bij->bji',1-d1))
+        dist = torch.einsum('bdn,bmd->bnm', 1-d0, torch.einsum('bij->bji', d1)) + torch.einsum('bdn,bmd->bnm', d0, torch.einsum('bij->bji',1-d1))
         matches0, scores0 = find_nn(
-            sim, ratio_threshold, self.conf['distance_threshold'])
+            dist, ratio_threshold, self.conf['distance_threshold'])
         if self.conf['do_mutual_check']:
             matches1, scores1 = find_nn(
-                sim.transpose(1, 2), ratio_threshold,
+                dist.transpose(1, 2), ratio_threshold,
                 self.conf['distance_threshold'])
             matches0 = mutual_check(matches0, matches1)
         return {
