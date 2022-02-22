@@ -1,6 +1,3 @@
-import sys
-from pathlib import Path
-
 from ..utils.base_model import BaseModel
 
 import cv2
