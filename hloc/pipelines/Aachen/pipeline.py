@@ -28,7 +28,7 @@ images = dataset / 'images/images_upright/'
 
 outputs = args.outputs  # where everything will be saved
 sift_sfm = outputs / 'sfm_sift'  # from which we extract the reference poses
-reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
+reference_sfm = outputs / f'sfm_{args.detector}+{args.matcher}'  # the SfM model we will build
 sfm_pairs = outputs / f'pairs-db-covis{args.num_covis}.txt'  # top-k most covisible in SIFT model
 loc_pairs = outputs / f'pairs-query-netvlad{args.num_loc}.txt'  # top-k retrieved by NetVLAD
 results = outputs / f'Aachen_hloc_{args.detector}+{args.matcher}_netvlad{args.num_loc}.txt'
