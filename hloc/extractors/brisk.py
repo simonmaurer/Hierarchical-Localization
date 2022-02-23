@@ -23,9 +23,12 @@ class BRISK(BaseModel):
           self.detector = cv2.BRISK_create()
     
     def _forward(self, data):
-        img = data['image'].numpy()
-        img = img.squeeze(0)
+        img = data['image']
+        img = img.squeeze()
         img = img.transpose(1, 2, 0)
+        if img.dtype = torch.float32:
+            img = (img*255.).type(torch.uint8)
+        img = img.numpy()
         
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
