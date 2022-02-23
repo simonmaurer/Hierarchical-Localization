@@ -169,6 +169,28 @@ confs = {
             'resize_force': True,
         },
     },
+    'orb': {
+        'output': 'feats-orb-r1024',
+        'model': {
+            'name': 'orb',
+            'max_keypoints': None,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1024,
+        },
+    },
+    'brisk': {
+        'output': 'feats-brisk-r1024',
+        'model': {
+            'name': 'brisk',
+            'detection_threshold': None,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1024,
+        },
+    },
     'r2d2': {
         'output': 'feats-r2d2-n5000-r1024',
         'model': {
