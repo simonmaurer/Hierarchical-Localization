@@ -29,7 +29,7 @@ class ORB(BaseModel):
         img = img.permute((1, 2, 0))
         if img.dtype != torch.uint8:
             img = (img*255.).type(torch.uint8)
-        img = img.numpy()
+        img = img.cpu().numpy()
         
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
