@@ -15,7 +15,7 @@ parser.add_argument('--num_covis', type=int, default=20,
                     help='Number of image pairs for SfM, default: %(default)s')
 parser.add_argument('--num_loc', type=int, default=50,
                     help='Number of image pairs for loc, default: %(default)s')
-parser.add_argument('--detector', type=str, default='superpoint_max',
+parser.add_argument('--detector', type=str, default='superpoint_aachen',
                     help='Feature detection algorithm, default: %(default)s')
 parser.add_argument('--matcher', type=str, default='superglue',
                     help='Matching algorithm, default: %(default)s')
