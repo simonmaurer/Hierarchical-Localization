@@ -27,7 +27,7 @@ def main():
     #reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
     #results = outputs / 'Aachen_hloc_superpoint+superglue_netvlad20.txt'  # the result file
     reference_sfm = outputs / 'sfm_muri+NN-dist0.7'  # the SfM model we will build
-    results = outputs / 'Aachen_hloc_muri+NN-dist0.7_netvlad20.txt'  # the result file
+    results = outputs / 'Aachen_hloc_muri+NN-dist0.7_netvlad30.txt'  # the result file
 
     # list the standard configurations available
     print(f'Configs for feature extractors:\n{pformat(extract_features.confs)}')
