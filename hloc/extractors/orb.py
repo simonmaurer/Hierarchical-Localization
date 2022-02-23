@@ -23,16 +23,19 @@ class ORB(BaseModel):
           self.detector = cv2.ORB_create()
     
     def _forward(self, data):
-        img = data['image'].numpy()
-        img = img.squeeze(0)
+        img = data['image']
+        img = img.squeeze()
         img = img.transpose(1, 2, 0)
+        if img.dtype = torch.float32:
+            img = (img*255.).type(torch.uint8)
+        img = img.numpy()
         
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
 
         keypoints = torch.from_numpy(keypoints)
         if not self.conf['desc_uint8']:
-            descriptors = np.unpackbits(descriptors, -1)
+            descriptors = np.unpackbits(descriptors, axis = -1)
             descriptors = torch.FloatTensor(descriptors).t()
         else:
             descriptors = torch.from_numpy(descriptors).t()
