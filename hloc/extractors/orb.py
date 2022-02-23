@@ -11,13 +11,12 @@ class ORB(BaseModel):
         'max_keypoints': None,
         'min_size': 320,
         'max_size': 1024,
-        'desc_uint8': False;
+        'desc_uint8': False,
     }
     required_inputs = ['image']
 
     def _init(self, conf):
         num_features = conf['max_keypoints']
-        print("Init ORB")
         if num_features:
             self.detector = cv2.ORB_create(nfeatures=num_features)
         else:

@@ -11,7 +11,7 @@ class BRISK(BaseModel):
         'detection_threshold': None,
         'min_size': 320,
         'max_size': 1024,
-        'desc_uint8': False;
+        'desc_uint8': False,
     }
     required_inputs = ['image']
 
