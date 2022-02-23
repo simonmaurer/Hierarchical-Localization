@@ -25,8 +25,8 @@ class BRISK(BaseModel):
     def _forward(self, data):
         img = data['image']
         device = img.device
-        img = img.squeeze()
-        img = img.transpose(1, 2, 0)
+        img = img.squeeze(0)
+        img = img.permute((1, 2, 0))
         if img.dtype != torch.uint8:
             img = (img*255.).type(torch.uint8)
         img = img.numpy()

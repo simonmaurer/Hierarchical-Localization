@@ -176,7 +176,7 @@ confs = {
             'max_keypoints': None,
         },
         'preprocessing': {
-            'grayscale': True,
+            'grayscale': False,
             'resize_max': 1024,
         },
     },
