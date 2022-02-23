@@ -16,6 +16,10 @@ parser.add_argument('--num_covis', type=int, default=20,
                     help='Number of image pairs for SfM, default: %(default)s')
 parser.add_argument('--num_loc', type=int, default=50,
                     help='Number of image pairs for loc, default: %(default)s')
+parser.add_argument('--detector', type=str, default='superpoint',
+                    help='Feature detection algorithm, default: %(default)s')
+parser.add_argument('--matcher', type=str, default='superglue',
+                    help='Matching algorithm, default: %(default)s')
 args = parser.parse_args()
 
 # Setup the paths
@@ -27,7 +31,7 @@ sift_sfm = outputs / 'sfm_sift'  # from which we extract the reference poses
 reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
 sfm_pairs = outputs / f'pairs-db-covis{args.num_covis}.txt'  # top-k most covisible in SIFT model
 loc_pairs = outputs / f'pairs-query-netvlad{args.num_loc}.txt'  # top-k retrieved by NetVLAD
-results = outputs / f'Aachen_hloc_superpoint+superglue_netvlad{args.num_loc}.txt'
+results = outputs / f'Aachen_hloc_{args.detector}+{args.matcher}_netvlad{args.num_loc}.txt'
 
 # list the standard configurations available
 print(f'Configs for feature extractors:\n{pformat(extract_features.confs)}')
@@ -35,8 +39,8 @@ print(f'Configs for feature matchers:\n{pformat(match_features.confs)}')
 
 # pick one of the configurations for extraction and matching
 retrieval_conf = extract_features.confs['netvlad']
-feature_conf = extract_features.confs['superpoint_aachen']
-matcher_conf = match_features.confs['superglue']
+feature_conf = extract_features.confs[args.detector]
+matcher_conf = match_features.confs[args.matcher]
 
 features = extract_features.main(feature_conf, images, outputs)
 
