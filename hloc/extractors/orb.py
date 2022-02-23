@@ -18,12 +18,13 @@ class ORB(BaseModel):
     def _init(self, conf):
         num_features = conf['max_keypoints']
         if num_features:
-          self.detector = cv2.ORB_create(nfeatures=num_features)
+            self.detector = cv2.ORB_create(nfeatures=num_features)
         else:
-          self.detector = cv2.ORB_create()
+            self.detector = cv2.ORB_create()
     
     def _forward(self, data):
         img = data['image']
+        device = img.device
         img = img.squeeze()
         img = img.transpose(1, 2, 0)
         if img.dtype != torch.uint8:
@@ -33,12 +34,12 @@ class ORB(BaseModel):
         keypoints, descriptors = self.detector.detectAndCompute(img, None)
         keypoints = np.asarray([k.pt for k in keypoints])
 
-        keypoints = torch.from_numpy(keypoints)
+        keypoints = torch.from_numpy(keypoints).to(device)
         if not self.conf['desc_uint8']:
             descriptors = np.unpackbits(descriptors, axis = -1)
-            descriptors = torch.FloatTensor(descriptors).t()
+            descriptors = torch.FloatTensor(descriptors).to(device).t()
         else:
-            descriptors = torch.from_numpy(descriptors).t()
+            descriptors = torch.from_numpy(descriptors),to(device).t()
 
         pred = {'keypoints': keypoints[None],
                 'descriptors': descriptors[None]}
