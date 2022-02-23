@@ -294,14 +294,14 @@ class ImageDataset(torch.utils.data.Dataset):
             image = image.transpose((2, 0, 1))  # HxWxC to CxHxW
         image = image / 255.
         
-        if self.conf.resize_max and (self.conf.resize_force
-                                     or max(size) > self.conf.resize_max):
-            scale = self.conf.resize_max / max(size)
-            size_new = tuple(int(round(x*scale)) for x in size)
-            image = torch.from_numpy(image)
-            size_new = tuple(x-np.mod(x, 8) for x in size_new)
-            image = center_crop(image, size_new)
-            image = image.numpy()
+        # if self.conf.resize_max and (self.conf.resize_force
+        #                              or max(size) > self.conf.resize_max):
+        #     scale = self.conf.resize_max / max(size)
+        #     size_new = tuple(int(round(x*scale)) for x in size)
+        #     image = torch.from_numpy(image)
+        #     size_new = tuple(x-np.mod(x, 8) for x in size_new)
+        #     image = center_crop(image, size_new)
+        #     image = image.numpy()
 
         data = {
             'name': name,

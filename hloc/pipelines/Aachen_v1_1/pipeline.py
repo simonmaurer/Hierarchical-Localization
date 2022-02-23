@@ -15,7 +15,7 @@ parser.add_argument('--num_covis', type=int, default=20,
                     help='Number of image pairs for SfM, default: %(default)s')
 parser.add_argument('--num_loc', type=int, default=50,
                     help='Number of image pairs for loc, default: %(default)s')
-parser.add_argument('--detector', type=str, default='superpoint',
+parser.add_argument('--detector', type=str, default='superpoint_max',
                     help='Feature detection algorithm, default: %(default)s')
 parser.add_argument('--matcher', type=str, default='superglue',
                     help='Matching algorithm, default: %(default)s')
@@ -27,7 +27,7 @@ images = dataset / 'images/images_upright/'
 sift_sfm = dataset / '3D-models/aachen_v_1_1'
 
 outputs = args.outputs  # where everything will be saved
-reference_sfm = outputs / 'sfm_superpoint+superglue'  # the SfM model we will build
+reference_sfm = outputs / f'sfm_{args.detector}+{args.matcher}'  # the SfM model we will build
 sfm_pairs = outputs / f'pairs-db-covis{args.num_covis}.txt'  # top-k most covisible in SIFT model
 loc_pairs = outputs / f'pairs-query-netvlad{args.num_loc}.txt'  # top-k retrieved by NetVLAD
 results = outputs / f'Aachen-v1.1_hloc_{args.detector}+{args.matcher}_netvlad{args.num_loc}.txt'
@@ -38,8 +38,8 @@ print(f'Configs for feature matchers:\n{pformat(match_features.confs)}')
 
 # pick one of the configurations for extraction and matching
 retrieval_conf = extract_features.confs['netvlad']
-feature_conf = extract_features.confs['superpoint_max']
-matcher_conf = match_features.confs['superglue']
+feature_conf = extract_features.confs[args.detector]
+matcher_conf = match_features.confs[args.matcher]
 
 features = extract_features.main(feature_conf, images, outputs)
 
@@ -70,4 +70,4 @@ localize_sfm.main(
     features,
     loc_matches,
     results,
-    covisibility_clustering=False)  # not required with SuperPoint+SuperGlue
+    covisibility_clustering=True)  # not required with SuperPoint+SuperGlue
