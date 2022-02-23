@@ -25,9 +25,8 @@ class ORB(BaseModel):
     def _forward(self, data):
         img = data['image']
         device = img.device
-        img = img.squeeze()
         print("Shape: ",img.shape)
-        print("Dtype:", img.dtype)
+        img = img.squeeze(0)
         img = img.transpose(1, 2, 0)
         if img.dtype != torch.uint8:
             img = (img*255.).type(torch.uint8)
