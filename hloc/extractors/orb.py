@@ -17,6 +17,7 @@ class ORB(BaseModel):
 
     def _init(self, conf):
         num_features = conf['max_keypoints']
+        print("Init ORB")
         if num_features:
             self.detector = cv2.ORB_create(nfeatures=num_features)
         else:

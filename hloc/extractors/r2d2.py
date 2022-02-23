@@ -35,7 +35,6 @@ class R2D2(BaseModel):
 
     def _forward(self, data):
         img = data['image']
-        print(img.shape)
         img = self.norm_rgb(img)
 
         xys, desc, scores = extract_multiscale(
