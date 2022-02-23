@@ -26,7 +26,7 @@ class ORB(BaseModel):
         img = data['image']
         img = img.squeeze()
         img = img.transpose(1, 2, 0)
-        if img.dtype = torch.float32:
+        if img.dtype == torch.float32:
             img = (img*255.).type(torch.uint8)
         img = img.numpy()
         
