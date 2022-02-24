@@ -13,7 +13,7 @@ from muri.detector_binary import BinaryMURIDetector
 
 class MURIBinary(BaseModel):
     default_conf = {
-        'model_name': 'muri',
+        'model_name': 'muri_binary',
         'keep_topk_or_threshold': 0.7,
         'min_size': 320,
         'max_size': 1024,
