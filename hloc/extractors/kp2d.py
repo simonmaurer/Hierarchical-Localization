@@ -33,9 +33,9 @@ class KP2D(BaseModel):
     def _forward(self, data):
         img = data['image']
         device = img.device
-        img = tf.convert_to_tensor(img.numpy())
-        img = tf.transpose(img, (0,2,3,1))
+        img = img.permute((0,2,3,1))
         img = self._normalize(img)
+        img = tf.convert_to_tensor(img.cpu()numpy())
         
         scores, keypoints, descriptors = self.detector.detectAndCompute(img)
 
