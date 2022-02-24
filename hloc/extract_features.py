@@ -148,11 +148,24 @@ confs = {
         'model': {
             'name': 'muri_binary',
             'keep_topk_or_threshold': 4000,
-            'gpu': False,
+            'gpu': True,
         },
         'preprocessing': {
             'grayscale': False,
             'resize_max': 1024,
+            'resize_force': True,
+        },
+    },
+    'muri_binary_1600': {
+        'output': 'feats-murib-n4096-r1600',
+        'model': {
+            'name': 'muri_binary',
+            'keep_topk_or_threshold': 4096,
+            'gpu': True,
+        },
+        'preprocessing': {
+            'grayscale': False,
+            'resize_max': 1600,
             'resize_force': True,
         },
     },
@@ -161,34 +174,12 @@ confs = {
         'model': {
             'name': 'muri_binary',
             'keep_topk_or_threshold': 1600,
-            'gpu': False,
+            'gpu': True,
         },
         'preprocessing': {
             'grayscale': False,
             'resize_max': 640,
             'resize_force': True,
-        },
-    },
-    'orb': {
-        'output': 'feats-orb-r1024',
-        'model': {
-            'name': 'orb',
-            'max_keypoints': None,
-        },
-        'preprocessing': {
-            'grayscale': False,
-            'resize_max': 1024,
-        },
-    },
-    'brisk': {
-        'output': 'feats-brisk-r1024',
-        'model': {
-            'name': 'brisk',
-            'detection_threshold': None,
-        },
-        'preprocessing': {
-            'grayscale': False,
-            'resize_max': 1024,
         },
     },
     'r2d2': {
@@ -302,6 +293,7 @@ class ImageDataset(torch.utils.data.Dataset):
         name = self.names[idx]
         image = read_image(self.root / name, self.conf.grayscale)
         image = image.astype(np.float32)
+        size_new = image.shape[:2][::-1]
         size = image.shape[:2][::-1]
 
         if self.conf.resize_max and (self.conf.resize_force
@@ -316,14 +308,14 @@ class ImageDataset(torch.utils.data.Dataset):
             image = image.transpose((2, 0, 1))  # HxWxC to CxHxW
         image = image / 255.
         
-        # if self.conf.resize_max and (self.conf.resize_force
-        #                              or max(size) > self.conf.resize_max):
-        #     scale = self.conf.resize_max / max(size)
-        #     size_new = tuple(int(round(x*scale)) for x in size)
-        #     image = torch.from_numpy(image)
-        #     size_new = tuple(x-np.mod(x, 8) for x in size_new)
-        #     image = center_crop(image, size_new)
-        #     image = image.numpy()
+#        if self.conf.resize_max and (self.conf.resize_force
+#                              or max(size) > self.conf.resize_max):
+#        scale = self.conf.resize_max / max(size)
+#        size_new = tuple(int(round(x*scale)) for x in size)
+        image = torch.from_numpy(image)
+        size_new = tuple(x-np.mod(x, 8) for x in size_new)
+        image = center_crop(image, size_new[::-1])
+        image = image.numpy()
 
         data = {
             'name': name,

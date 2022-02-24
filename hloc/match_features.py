@@ -59,22 +59,105 @@ confs = {
             'do_mutual_check': True,
         },
     },
-    'NNH-distance': {
+    'NNH-distance2': {
         'output': 'matches-NNH-mutual-dist12.0',
         'model': {
             'name': 'nearest_neighbor_hamming',
             'do_mutual_check': True,
-            'distance_threshold': 12.0,
+            'distance_threshold': 2.0,
         },
     },
-    'NNH-ratio': {
+    'NNH-distance4': {
+        'output': 'matches-NNH-mutual-dist12.0',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'distance_threshold': 4.0,
+        },
+    },
+    'NNH-distance8': {
+        'output': 'matches-NNH-mutual-dist12.0',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'distance_threshold': 8.0,
+        },
+    },
+    'NNH-distance16': {
+        'output': 'matches-NNH-mutual-dist12.0',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'distance_threshold': 16.0,
+        },
+    },
+    'NNH-distance32': {
+        'output': 'matches-NNH-mutual-dist12.0',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'distance_threshold': 32.0,
+        },
+    },
+    'NNH-ratio0.7': {
         'output': 'matches-NNH-mutual-ratio.7',
         'model': {
             'name': 'nearest_neighbor_hamming',
             'do_mutual_check': True,
             'ratio_threshold': 0.7,
         },
-    }
+    },
+    'NNH-ratio0.8': {
+        'output': 'matches-NNH-mutual-ratio.8',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.8,
+        },
+    },
+    'NNH-ratio0.9': {
+        'output': 'matches-NNH-mutual-ratio.9',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.9,
+        },
+    },
+    'NNH-ratio0.95': {
+        'output': 'matches-NNH-mutual-ratio.95',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.95,
+        },
+    },
+    'NNH-ratio0.8_dist8': {
+        'output': 'matches-NNH-mutual-ratio.8_dist8',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.8,
+            'distance_threshold': 8.0,
+        },
+    },
+    'NNH-ratio0.8_dist16': {
+        'output': 'matches-NNH-mutual-ratio.8_dist16',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.9,
+            'distance_threshold': 16.0,
+        },
+    },
+    'NNH-ratio0.8_dist32': {
+        'output': 'matches-NNH-mutual-ratio.8_dist32',
+        'model': {
+            'name': 'nearest_neighbor_hamming',
+            'do_mutual_check': True,
+            'ratio_threshold': 0.8,
+            'distance_threshold': 32.0,
+        },
+    },
 }
 
 
